@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static "css/modal.css" %}">
+    <script src="{% static "js/modal.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/tariffs.css" %}">
+    <script src="{% static "js/tariffs.js" %}"></script>
+{% endblock headlinks %}
+
+{% block main %}
+{{block.super}}
+{% endblock main %}
+
+{% block payment_methods %}
+    <div class="payment">
+        <p class="modal__heading">
+            Оплата
+        </p>
+        <div class="payment__methods">
+            <p class="payment__methods-heading">Выберите способ оплаты:</p>
+            <div class="payment__links">
+                <a href="{% url 'start_tariff_payment_nowpaiments' tariff_price.id %}" class="payment__link" id="crypto-link">
+                    <p class="payment__link-title">
+                        Оплата криптовалютой:
+                    </p>
+                    <div class="payment__link-img-wrapper">
+                        <img src="{% static "images/payment-icons/payment-crypto.webp" %}" alt="crypto" class="payment__link-img">
+                    </div>
+                </a>
+                <a href="{% url 'start_tariff_payment_merchant001' tariff_price.id %}" class="payment__link" id="russian-cards-link">
+                    <p class="payment__link-title">
+                        Оплата картой России:
+                    </p>
+                    <div class="payment__link-img-wrapper">
+                        <img src="{% static "images/payment-icons/payment-russia.webp" %}" alt="russian-cards" class="payment__link-img">
+                    </div>
+                </a>
+                <a href="" class="payment__link" id="foreign-cards-link">
+                    <p class="payment__link-title">
+                        Оплата зарубежной картой:
+                    </p>
+                    <div class="payment__link-img-wrapper">
+                        <img src="{% static "images/payment-icons/payment-foreign.webp" %}" alt="foreign-cards" class="payment__link-img">
+                    </div>
+                </a>
+                <a href="" class="payment__link" id="other-payment-link">
+                    <p class="payment__link-title">
+                        Иной способ оплаты:
+                    </p>
+                    <div class="payment__link-img-wrapper">
+                        <img src="{% static "images/payment-icons/payment-other.webp" %}" alt="other-payment" class="payment__link-img">
+                    </div>
+                </a>
+            </div>
+        </div>
+        <a href="" class="payment__help ui-button">Помощь менеджера</a>
+        <p class="payment__info"> Внимание! Заказ считается оплаченным при получении средств на счёт магазина, а не при списании их со счета покупателя. Различные платежные системы могут обрабатывать такой запрос до нескольких дней.</p>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static 'css/post.css' %}" />
+    <link rel="stylesheet" href="{% static 'django_ckeditor_5/dist/styles.css' %}" />
+{% endblock headlinks %}
+
+{% block main %}
+    <div class="post">
+        <div id="editor"></div>
+        {% block post %}
+        {% endblock post %}
+    </div>
+{% endblock main %}
+{% block scripts %}
+    <script src="{% static 'js/post.js' %}"></script>
+{% endblock scripts %}

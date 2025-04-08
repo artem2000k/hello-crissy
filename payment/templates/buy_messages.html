@@ -1,0 +1,182 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static "css/tariffs.css" %}">
+    <script src="{% static "js/tariffs.js" %}"></script>
+    <style>
+        :root {
+            --tariff-bg: url("../images/tariffs-messages.webp");
+        }
+    </style>
+{% endblock headlinks %}
+
+{% block main %}
+<form class="currency__form" method="post">
+    {% csrf_token %}
+    {{ currency_form.as_p }}
+</form>
+<div class="tariffs {% if not user.is_authenticated %}tariffs_unavailable {% endif %}"  data-currency="{{ tariff_xl.currency.code }}" >
+    <div class="tariffs__list">
+        <div class="tariff__wrapper" data-open-modal="payment-methods" id="payment-methods-xl">
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>{{ tariff_xl.price }}</span> {{ tariff_xl.currency.symbol }}
+                </p>
+                <h3 class="tariff__name">{{ tariff_xl.tariff.site_name }}</h3>
+                <div class="tariff__full_name" style="display: none;">{{ tariff_xl.tariff.name }}</div>
+                <div class="tariff__description">
+                    <svg width="115" height="99" viewBox="0 0 115 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_1255_3092)">
+                    <path d="M96.0312 78.8336L18.7506 78.9762C15.4329 78.9827 12.7347 76.2938 12.7283 72.9762L12.637 26.181C12.6306 22.8633 15.3194 20.1651 18.6371 20.1587L95.9176 20.0161C99.2353 20.0096 101.933 22.6985 101.94 26.0161L102.031 72.8113C102.038 76.129 99.3488 78.8272 96.0312 78.8336Z" stroke="#EDE530" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M63.0578 49.0299C64.5147 47.3928 65.6608 45.4528 65.6498 43.4212C65.6276 40.8661 63.5386 38.804 60.9835 38.8262C59.3813 38.8415 57.9733 39.6717 57.1474 40.9217C56.3083 39.6855 54.8847 38.878 53.2742 38.8954C50.719 38.9176 48.6569 41.0066 48.6792 43.5618C48.662 49.4643 57.2479 53.691 57.2479 53.691C57.2479 53.691 58.6167 52.9156 60.2528 51.6245" stroke="#EDE530" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.0752 25.2656L43.3404 42.2245" stroke="#EDE530" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M96.8385 25.2934L72.5502 42.2389" stroke="#EDE530" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <path d="M96.0312 78.8336L18.7506 78.9762C15.4329 78.9827 12.7347 76.2938 12.7283 72.9762L12.637 26.181C12.6306 22.8633 15.3194 20.1651 18.6371 20.1587L95.9176 20.0161C99.2353 20.0096 101.933 22.6985 101.94 26.0161L102.031 72.8113C102.038 76.129 99.3488 78.8272 96.0312 78.8336Z" stroke="#FFEB80" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M63.0578 49.0299C64.5147 47.3928 65.6608 45.4528 65.6498 43.4212C65.6276 40.8661 63.5386 38.804 60.9835 38.8262C59.3813 38.8415 57.9733 39.6717 57.1474 40.9217C56.3083 39.6855 54.8847 38.878 53.2742 38.8954C50.719 38.9176 48.6569 41.0066 48.6792 43.5618C48.662 49.4643 57.2479 53.691 57.2479 53.691C57.2479 53.691 58.6167 52.9156 60.2528 51.6245" stroke="#FFEB80" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.0752 25.2656L43.3404 42.2245" stroke="#FFEB80" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M96.8385 25.2934L72.5502 42.2389" stroke="#FFEB80" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <filter id="filter0_f_1255_3092" x="6.47246" y="13.8523" width="101.724" height="71.2875" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="2.4" result="effect1_foregroundBlur_1255_3092"/>
+                    </filter>
+                    </defs>
+                    </svg>
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size messages">{{ tariff_xl.tariff.messages_coubt }} сообщений</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal="payment-methods" id="payment-methods-l">
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>{{ tariff_l.price }}</span> {{ tariff_l.currency.symbol }}
+                </p>
+                <h3 class="tariff__name">{{ tariff_l.tariff.site_name }}</h3>
+                <div class="tariff__full_name" style="display: none;">{{ tariff_l.tariff.name }}</div>
+                <div class="tariff__description">
+                    <svg width="115" height="99" viewBox="0 0 115 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_1255_3068)">
+                    <path d="M96.0312 78.8336L18.7506 78.9762C15.4329 78.9827 12.7347 76.2938 12.7283 72.9762L12.637 26.181C12.6306 22.8633 15.3194 20.1651 18.6371 20.1587L95.9176 20.0161C99.2353 20.0096 101.933 22.6985 101.94 26.0161L102.031 72.8113C102.038 76.129 99.3488 78.8272 96.0312 78.8336Z" stroke="#FF6589" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M63.0578 49.0299C64.5147 47.3928 65.6608 45.4528 65.6498 43.4212C65.6276 40.8661 63.5386 38.804 60.9835 38.8262C59.3813 38.8415 57.9733 39.6717 57.1474 40.9217C56.3083 39.6855 54.8847 38.878 53.2742 38.8954C50.719 38.9176 48.6569 41.0066 48.6792 43.5618C48.662 49.4643 57.2479 53.691 57.2479 53.691C57.2479 53.691 58.6167 52.9156 60.2528 51.6245" stroke="#FF6589" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.0752 25.2656L43.3404 42.2245" stroke="#FF6589" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M96.8385 25.2934L72.5502 42.2389" stroke="#FF6589" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <path d="M96.0312 78.8336L18.7506 78.9762C15.4329 78.9827 12.7347 76.2938 12.7283 72.9762L12.637 26.181C12.6306 22.8633 15.3194 20.1651 18.6371 20.1587L95.9176 20.0161C99.2353 20.0096 101.933 22.6985 101.94 26.0161L102.031 72.8113C102.038 76.129 99.3488 78.8272 96.0312 78.8336Z" stroke="#FF779A" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M63.0578 49.0299C64.5147 47.3928 65.6608 45.4528 65.6498 43.4212C65.6276 40.8661 63.5386 38.804 60.9835 38.8262C59.3813 38.8415 57.9733 39.6717 57.1474 40.9217C56.3083 39.6855 54.8847 38.878 53.2742 38.8954C50.719 38.9176 48.6569 41.0066 48.6792 43.5618C48.662 49.4643 57.2479 53.691 57.2479 53.691C57.2479 53.691 58.6167 52.9156 60.2528 51.6245" stroke="#FF779A" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.0752 25.2656L43.3404 42.2245" stroke="#FF779A" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M96.8385 25.2934L72.5502 42.2389" stroke="#FF779A" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <filter id="filter0_f_1255_3068" x="6.47246" y="13.8523" width="101.724" height="71.2875" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="2.4" result="effect1_foregroundBlur_1255_3068"/>
+                    </filter>
+                    </defs>
+                    </svg>
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size messages">{{ tariff_l.tariff.messages_coubt }} сообщений</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal="payment-methods" id="payment-methods-m">
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>{{ tariff_m.price }}</span> {{ tariff_m.currency.symbol }}
+                </p>
+                <h3 class="tariff__name">{{ tariff_m.tariff.site_name }}</h3>
+                <div class="tariff__full_name" style="display: none;">{{ tariff_m.tariff.name }}</div>
+                <div class="tariff__description">
+                    <svg width="115" height="99" viewBox="0 0 115 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_1255_3080)">
+                    <path d="M96.0312 78.8336L18.7506 78.9762C15.4329 78.9827 12.7347 76.2938 12.7283 72.9762L12.637 26.181C12.6306 22.8633 15.3194 20.1651 18.6371 20.1587L95.9176 20.0161C99.2353 20.0096 101.933 22.6985 101.94 26.0161L102.031 72.8113C102.038 76.129 99.3488 78.8272 96.0312 78.8336Z" stroke="#5EC2FF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M63.0578 49.0299C64.5147 47.3928 65.6608 45.4528 65.6498 43.4212C65.6276 40.8661 63.5386 38.804 60.9835 38.8262C59.3813 38.8415 57.9733 39.6717 57.1474 40.9217C56.3083 39.6855 54.8847 38.878 53.2742 38.8954C50.719 38.9176 48.6569 41.0066 48.6792 43.5618C48.662 49.4643 57.2479 53.691 57.2479 53.691C57.2479 53.691 58.6167 52.9156 60.2528 51.6245" stroke="#5EC2FF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.0752 25.2656L43.3404 42.2245" stroke="#5EC2FF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M96.8385 25.2934L72.5502 42.2389" stroke="#5EC2FF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <path d="M96.0312 78.8336L18.7506 78.9762C15.4329 78.9827 12.7347 76.2938 12.7283 72.9762L12.637 26.181C12.6306 22.8633 15.3194 20.1651 18.6371 20.1587L95.9176 20.0161C99.2353 20.0096 101.933 22.6985 101.94 26.0161L102.031 72.8113C102.038 76.129 99.3488 78.8272 96.0312 78.8336Z" stroke="#74CAFF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M63.0578 49.0299C64.5147 47.3928 65.6608 45.4528 65.6498 43.4212C65.6276 40.8661 63.5386 38.804 60.9835 38.8262C59.3813 38.8415 57.9733 39.6717 57.1474 40.9217C56.3083 39.6855 54.8847 38.878 53.2742 38.8954C50.719 38.9176 48.6569 41.0066 48.6792 43.5618C48.662 49.4643 57.2479 53.691 57.2479 53.691C57.2479 53.691 58.6167 52.9156 60.2528 51.6245" stroke="#74CAFF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.0752 25.2656L43.3404 42.2245" stroke="#74CAFF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M96.8385 25.2934L72.5502 42.2389" stroke="#74CAFF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <filter id="filter0_f_1255_3080" x="6.47246" y="13.8523" width="101.724" height="71.2875" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="2.4" result="effect1_foregroundBlur_1255_3080"/>
+                    </filter>
+                    </defs>
+                    </svg>
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size messages">{{ tariff_m.tariff.messages_coubt }} сообщений</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal="payment-methods" id="payment-methods-s">
+            {% comment %} <a href="#" data-open-modal="payment-methods" id="payment-methods-s"> {% endcomment %}
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>{{ tariff_s.price }}</span> {{ tariff_s.currency.symbol }}
+                </p>
+                <h3 class="tariff__name">{{ tariff_s.tariff.site_name }}</h3>
+                <div class="tariff__full_name" style="display: none;">{{ tariff_s.tariff.name }}</div>
+                <div class="tariff__description">
+                    <svg width="115" height="99" viewBox="0 0 115 99" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_1255_3104)">
+                    <path d="M96.0312 78.8336L18.7506 78.9762C15.4329 78.9827 12.7347 76.2938 12.7283 72.9762L12.637 26.181C12.6306 22.8633 15.3194 20.1651 18.6371 20.1587L95.9176 20.0161C99.2353 20.0096 101.933 22.6985 101.94 26.0161L102.031 72.8113C102.038 76.129 99.3488 78.8272 96.0312 78.8336Z" stroke="#B358D1" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M63.0578 49.0299C64.5147 47.3928 65.6608 45.4528 65.6498 43.4212C65.6276 40.8661 63.5386 38.804 60.9835 38.8262C59.3813 38.8415 57.9733 39.6717 57.1474 40.9217C56.3083 39.6855 54.8847 38.878 53.2742 38.8954C50.719 38.9176 48.6569 41.0066 48.6792 43.5618C48.662 49.4643 57.2479 53.691 57.2479 53.691C57.2479 53.691 58.6167 52.9156 60.2528 51.6245" stroke="#B358D1" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.0752 25.2656L43.3404 42.2245" stroke="#B358D1" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M96.8385 25.2934L72.5502 42.2389" stroke="#B358D1" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <path d="M96.0312 78.8336L18.7506 78.9762C15.4329 78.9827 12.7347 76.2938 12.7283 72.9762L12.637 26.181C12.6306 22.8633 15.3194 20.1651 18.6371 20.1587L95.9176 20.0161C99.2353 20.0096 101.933 22.6985 101.94 26.0161L102.031 72.8113C102.038 76.129 99.3488 78.8272 96.0312 78.8336Z" stroke="#D094FF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M63.0578 49.0299C64.5147 47.3928 65.6608 45.4528 65.6498 43.4212C65.6276 40.8661 63.5386 38.804 60.9835 38.8262C59.3813 38.8415 57.9733 39.6717 57.1474 40.9217C56.3083 39.6855 54.8847 38.878 53.2742 38.8954C50.719 38.9176 48.6569 41.0066 48.6792 43.5618C48.662 49.4643 57.2479 53.691 57.2479 53.691C57.2479 53.691 58.6167 52.9156 60.2528 51.6245" stroke="#D094FF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19.0752 25.2656L43.3404 42.2245" stroke="#D094FF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M96.8385 25.2934L72.5502 42.2389" stroke="#D094FF" stroke-width="2.73" stroke-linecap="round" stroke-linejoin="round"/>
+                    <defs>
+                    <filter id="filter0_f_1255_3104" x="6.47246" y="13.8523" width="101.724" height="71.2875" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="2.4" result="effect1_foregroundBlur_1255_3104"/>
+                    </filter>
+                    </defs>
+                    </svg>
+                    
+                    
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size messages">{{ tariff_s.tariff.messages_coubt }} сообщений</p>
+            </div>
+            {% comment %} </a> {% endcomment %}
+        </div>
+    </div>
+</div>
+<form class="secret-code-form" action="/activate-tariff/" method="post">
+    {% csrf_token %}
+    <input type="text" maxlength="12" class="secret-code-form__input ui-input" name="code" required placeholder="Секретный код">
+     {% comment %} {{ form.as_p }} {% endcomment %}
+    <input class="secret-code-form__submit ui-button" type="submit" value="Ok">
+</form>
+{% endblock main %}
+
+{% block payment_methods %}
+    <!-- Модальное окно для оплаты -->
+    {% include 'modal_payment_methods.html' %}
+{% endblock %}
+
+
+{% block footer %}
+    <footer class="footer">
+        <a class="footer__reviews-link" href="#">Отзывы о нас</a>
+    </footer>
+{%endblock%}
+

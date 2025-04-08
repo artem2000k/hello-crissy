@@ -1,0 +1,17 @@
+{% extends "post.html" %}
+{% load static %}
+
+{% block post %}
+<div class="post__header">
+    <div class="post__header-content">
+        <h1 class="post__title">{{ storie.title }}</h1>
+        <div class="post__info">{{ storie.created_at }}</div>
+        <p class="post__first-paragraph">{{ storie.anonce }}</p>
+    </div>
+
+</div>
+<div class="post__content">
+    <p>{{ storie.description|safe }}</p>
+</div>
+{% endblock post %}
+

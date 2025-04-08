@@ -1,0 +1,17 @@
+{% extends "post _preview.html" %}
+{% load static %}
+
+{% block post %}
+<div class="post__header">
+    <div class="post__header-content">
+        <h1 class="post__title">{{ tale.title }}</h1>
+        <div class="post__info">{{ tale.created_at }}</div>
+        <p class="post__first-paragraph">{{ tale.anonce }}</p>
+    </div>
+
+</div>
+<div class="post__content">
+    <p>{{ tale.description|safe }}</p>
+</div>
+{% endblock post %}
+

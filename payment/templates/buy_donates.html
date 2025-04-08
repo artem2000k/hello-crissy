@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static "css/tariffs.css" %}">
+    <script src="{% static "js/tariffs.js" %}"></script>
+    <style>
+        :root {
+            --tariff-bg: url("../images/tariffs-donates.webp");
+        }
+    </style>
+{% endblock headlinks %}
+
+{% block main %}
+<form class="currency__form" method="post">
+    {% csrf_token %}
+    {{ currency_form.as_p }}
+</form>
+<div class="tariffs {% if not user.is_superuser %}tariffs_unavailable {% endif %}">
+    <div class="tariffs__list">
+        <div class="tariff__wrapper" data-open-modal>
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>9999</span> ₽
+                </p>
+                <h3 class="tariff__name">Супер</h3>
+                <div class="tariff__description">
+                    <img src="{% static "images/tariff-donate-1.png" %}" alt="">
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size">200 донатов</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal>
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>5999</span> ₽
+                </p>
+                <h3 class="tariff__name">Выгодный</h3>
+                <div class="tariff__description">
+                    <img src="{% static "images/tariff-donate-2.png" %}" alt="">
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size">100 донатов</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal>
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>2999</span> ₽
+                </p>
+                <h3 class="tariff__name">Экономный</h3>
+                <div class="tariff__description">
+                    <img src="{% static "images/tariff-donate-3.png" %}" alt="">
+
+
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size">50 донатов</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal>
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>499</span> ₽
+                </p>
+                <h3 class="tariff__name">Пробный</h3>
+                <div class="tariff__description">
+                    <img src="{% static "images/tariff-donate-4.png" %}" alt="">
+
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size">10 донатов</p>
+            </div>
+        </div>
+    </div>
+</div>
+<form class="secret-code-form" action="/activate-tariff/" method="post">
+    {% csrf_token %}
+    <input type="text" maxlength="12" class="secret-code-form__input ui-input" name="code" required placeholder="Секретный код">
+     {% comment %} {{ form.as_p }} {% endcomment %}
+    <input class="secret-code-form__submit ui-button" type="submit" value="Ok">
+</form>
+{% endblock main %}
+
+{% block footer %}
+    <footer class="footer">
+        <a class="footer__reviews-link" href="#">Отзывы о нас</a>
+    </footer>
+{%endblock%}

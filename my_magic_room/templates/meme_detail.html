@@ -1,0 +1,5 @@
+<h1>{{ meme.title }}</h1>
+<img src="{{ meme.image.url }}" alt="{{ meme.title }}">
+<p>{{ meme.description }}</p>
+<p>Создано: {{ meme.created_at }}</p>
+<a href="{% url 'memes_list' %}">Назад</a>

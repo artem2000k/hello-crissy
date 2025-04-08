@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static 'css/post.css' %}" />
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/vendor/quill/quill.snow.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/quill-patch.css' %}" />
+    {% comment %} <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script> {% endcomment %}
+    <script src="{% static 'js/vendor/quill/quill.js' %}"></script>
+    <script src="{% static 'js/post.js' %}" defer></script>
+{% endblock headlinks %}
+
+{% block main %}
+    <div class="post">
+        <div id="editor"></div>
+        {% block post %}
+        {% endblock post %}
+    </div>
+{% endblock main %}

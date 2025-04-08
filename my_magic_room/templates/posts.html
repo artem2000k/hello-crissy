@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static 'css/posts.css' %}" />
+    <script src="{% static 'js/posts.js' %}" defer></script>
+{% endblock headlinks %}
+
+{% block main %}
+    <div class="posts">
+        {% block posts %}
+        {% endblock posts %}
+    </div>
+{% endblock main %}

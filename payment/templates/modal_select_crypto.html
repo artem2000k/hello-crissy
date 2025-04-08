@@ -1,0 +1,39 @@
+{% load static %}
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static "css/modal.css" %}">
+    <script src="{% static "js/modal.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/tariffs.css" %}">
+    <script src="{% static "js/tariffs.js" %}"></script>
+{% endblock headlinks %}
+
+{% block main %}
+    <div class="modal select-crypto" data-modal="select-crypto" id="select-crypto">
+        <button class="modal__close-button" data-close-modal>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="5.79297" y="17.1572" width="16" height="2" rx="1" transform="rotate(-45 5.79297 17.1572)" fill="white"/>
+                <rect x="7.20703" y="5.84277" width="16" height="2" rx="1" transform="rotate(45 7.20703 5.84277)" fill="white"/>
+            </svg>
+        </button>
+        <div class="modal__content">
+            <p class="modal__heading select-crypto">Выберите криптовалюту</p>
+            <div class="payment__methods">
+                <div class="payment__links">
+                    <div class="crypto__container">
+                    {% comment %} <a href="{% url 'start_tariff_payment_nowpaiments' tariff_price.id %}" class="payment__link" id="crypto-link"> {% endcomment %}
+                    {% for coin in crypto_list %}
+                    <a href="{% url 'crypto' coin %}" class="crypto__link" id="crypto-link-{{ coin }}">
+                        <div class="crypto__link-img-wrapper">
+                            <img src="{% static 'images/payment-icons/'|add:coin|add:'.png' %}" alt="crypto" class="crypto__link-img">
+                            
+                        </div>
+                        <div>
+                            {{ coin }}
+                        </div>
+                    </a> 
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

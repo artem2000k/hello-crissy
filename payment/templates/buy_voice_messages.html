@@ -1,0 +1,220 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static "css/tariffs.css" %}">
+    <script src="{% static "js/tariffs.js" %}"></script>
+    <style>
+        :root {
+            --tariff-bg: url("../images/tariffs-voice.webp");
+        }
+    </style>
+{% endblock headlinks %}
+
+{% block main %}
+<form class="currency__form" method="post">
+    {% csrf_token %}
+    {{ currency_form.as_p }}
+</form>
+<div class="tariffs {% if not user.is_superuser %}tariffs_unavailable {% endif %}">
+    <div class="tariffs__list">
+        <div class="tariff__wrapper" data-open-modal>
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>9999</span> ₽
+                </p>
+                <h3 class="tariff__name">Супер</h3>
+                <div class="tariff__description">
+                    <svg width="108" height="108" viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_0_1)">
+                    <circle cx="54" cy="54" r="46.5" stroke="#FFD600" stroke-width="5"/>
+                    <path d="M19 43L19 62" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M28 45L28 60" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M37 33L37 73" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M46 24L46 84" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M55 27L55 79" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M64 35L64 70" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M73 42L73 64" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M82 34L82 73" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M91 45L91 60" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+                    </g>
+                    <circle cx="54" cy="54" r="47" stroke="#FFF9DC" stroke-width="4"/>
+                    <path d="M19 43L19 62" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M28 45L28 60" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M37 33L37 73" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M46 24L46 84" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M55 27L55 79" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M64 35L64 70" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M73 42L73 64" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M82 34L82 73" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M91 45L91 60" stroke="#FFF9DC" stroke-width="4" stroke-linecap="round"/>
+                    <defs>
+                    <filter id="filter0_f_0_1" x="0.2" y="0.2" width="107.6" height="107.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="2.4" result="effect1_foregroundBlur_0_1"/>
+                    </filter>
+                    </defs>
+                    </svg>
+
+
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size">200 аудио</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal>
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>5999</span> ₽
+                </p>
+                <h3 class="tariff__name">Выгодный</h3>
+                <div class="tariff__description">
+                    <svg width="108" height="108" viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_0_1)">
+                    <circle cx="54" cy="54" r="46.5" stroke="#FF3867" stroke-width="5"/>
+                    <path d="M19 43L19 62" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M28 45L28 60" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M37 33L37 73" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M46 24L46 84" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M55 27L55 79" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M64 35L64 70" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M73 42L73 64" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M82 34L82 73" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M91 45L91 60" stroke="#FF3867" stroke-width="5" stroke-linecap="round"/>
+                    </g>
+                    <circle cx="54" cy="54" r="47" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4"/>
+                    <path d="M19 43L19 62" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M28 45L28 60" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M37 33L37 73" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M46 24L46 84" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M55 27L55 79" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M64 35L64 70" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M73 42L73 64" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M82 34L82 73" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M91 45L91 60" stroke="#FDE2E9" stroke-opacity="0.82" stroke-width="4" stroke-linecap="round"/>
+                    <defs>
+                    <filter id="filter0_f_0_1" x="0.2" y="0.2" width="107.6" height="107.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="2.4" result="effect1_foregroundBlur_0_1"/>
+                    </filter>
+                    </defs>
+                    </svg>
+
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size">100 аудио<br> сообщений</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal>
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>2999</span> ₽
+                </p>
+                <h3 class="tariff__name">Экономный</h3>
+                <div class="tariff__description">
+                    <svg width="108" height="108" viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_0_1)">
+                    <circle cx="54" cy="54" r="46.5" stroke="#05D5FF" stroke-width="5"/>
+                    <path d="M19 43L19 62" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M28 45L28 60" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M37 33L37 73" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M46 24L46 84" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M55 27L55 79" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M64 35L64 70" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M73 42L73 64" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M82 34L82 73" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M91 45L91 60" stroke="#05D5FF" stroke-width="5" stroke-linecap="round"/>
+                    </g>
+                    <circle cx="54" cy="54" r="47" stroke="#D8F0FF" stroke-width="4"/>
+                    <path d="M19 43L19 62" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M28 45L28 60" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M37 33L37 73" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M46 24L46 84" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M55 27L55 79" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M64 35L64 70" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M73 42L73 64" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M82 34L82 73" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M91 45L91 60" stroke="#D8F0FF" stroke-width="4" stroke-linecap="round"/>
+                    <defs>
+                    <filter id="filter0_f_0_1" x="0.2" y="0.2" width="107.6" height="107.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="2.4" result="effect1_foregroundBlur_0_1"/>
+                    </filter>
+                    </defs>
+                    </svg>
+
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size">50 аудио</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal>
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>499</span> ₽
+                </p>
+                <h3 class="tariff__name">Пробный</h3>
+                <div class="tariff__description">
+                    <svg width="108" height="108" viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g filter="url(#filter0_f_0_1)">
+                    <circle cx="54" cy="54" r="46.5" stroke="#E140FE" stroke-width="5"/>
+                    <path d="M19 43L19 62" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M28 45L28 60" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M37 33L37 73" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M46 24L46 84" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M55 27L55 79" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M64 35L64 70" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M73 42L73 64" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M82 34L82 73" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M91 45L91 60" stroke="#E140FE" stroke-width="5" stroke-linecap="round"/>
+                    </g>
+                    <circle cx="54" cy="54" r="47" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4"/>
+                    <path d="M19 43L19 62" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M28 45L28 60" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M37 33L37 73" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M46 24L46 84" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M55 27L55 79" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M64 35L64 70" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M73 42L73 64" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M82 34L82 73" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M91 45L91 60" stroke="#EAD2FD" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round"/>
+                    <defs>
+                    <filter id="filter0_f_0_1" x="0.2" y="0.2" width="107.6" height="107.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feGaussianBlur stdDeviation="2.4" result="effect1_foregroundBlur_0_1"/>
+                    </filter>
+                    </defs>
+                    </svg>
+
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size">10 аудио</p>
+            </div>
+        </div>
+    </div>
+</div>
+<form class="secret-code-form" action="/activate-tariff/" method="post">
+    {% csrf_token %}
+    <input type="text" maxlength="12" class="secret-code-form__input ui-input" name="code" required placeholder="Секретный код">
+     {% comment %} {{ form.as_p }} {% endcomment %}
+    <input class="secret-code-form__submit ui-button" type="submit" value="Ok">
+</form>
+{% endblock main %}
+
+{% block footer %}
+    <footer class="footer">
+        <a class="footer__reviews-link" href="#">Отзывы о нас</a>
+    </footer>
+{%endblock%}

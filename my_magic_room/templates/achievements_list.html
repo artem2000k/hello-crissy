@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список достижений</title>
+</head>
+<body>
+    <h1>Список достижений</h1>
+    <ul>
+        {% for achievement in achievements %}
+        <li>
+            <h2>{{ achievement.name }}</h2>
+            {% if achievement.image %}
+            <img src="{{ achievement.image.url }}" alt="{{ achievement.name }}">
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

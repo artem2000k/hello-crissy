@@ -1,0 +1,19 @@
+{% extends "posts.html" %}
+
+{% block posts %}
+    {% for story in stories %}
+
+        <a href="/stories/{{story.slug}}" class="post {% if story.anonce != "" %}post_announce{% endif %}">
+            {% if story.image %}
+                <img class="post__image" src="{{ story.image.url }}" alt="{{ story.title }}">
+            {% endif %}
+            <div class="post__data">
+                <div class="post__info">{{ story.created_at }}</div>
+                <h2 class="post__title">{{ story.title }}</h2>
+                <p class="post__content">
+                    {{story.anonce}}
+                </p>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock posts %}

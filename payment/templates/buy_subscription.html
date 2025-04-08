@@ -1,0 +1,123 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static "css/tariffs.css" %}">
+    <script src="{% static "js/tariffs.js" %}"></script>
+    <style>
+        :root {
+            --tariff-bg: url("../images/tariffs-messages.webp");
+        }
+    </style>
+{% endblock headlinks %}
+
+{% block main %}
+<form class="currency__form" method="post">
+    {% csrf_token %}
+    {{ currency_form.as_p }}
+</form>
+<div class="tariffs {% if not user.is_authenticated %}tariffs_unavailable {% endif %}" data-currency="{{ tariff_xl.currency.code }}">
+    <div class="tariffs__list">
+        <div class="tariff__wrapper" data-open-modal="payment-methods" id="payment-methods-xl">
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>{{ tariff_xl.price }}</span> {{ tariff_xl.currency.symbol }}
+                </p>
+                <h3 class="tariff__name">{{ tariff_xl.tariff.site_name }}</h3>
+                <div class="tariff__full_name" style="display: none;">{{ tariff_xl.tariff.name }}</div>
+                <div class="tariff__description_subs">
+                    <ul>
+                        {% for line in tariff_xl.tariff.description.splitlines %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size ">12 месяцев</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal="payment-methods" id="payment-methods-l">
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>{{ tariff_l.price }}</span> {{ tariff_l.currency.symbol }}
+                </p>
+                <h3 class="tariff__name">{{ tariff_l.tariff.site_name }}</h3>
+                <div class="tariff__full_name" style="display: none;">{{ tariff_l.tariff.name }}</div>
+                <div class="tariff__description_subs">
+                    <ul>
+                        {% for line in tariff_l.tariff.description.splitlines %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size subscription">6 месяцев</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal="payment-methods" id="payment-methods-m">
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>{{ tariff_m.price }}</span> {{ tariff_m.currency.symbol }}
+                </p>
+                <h3 class="tariff__name">{{ tariff_m.tariff.site_name }}</h3>
+                <div class="tariff__full_name" style="display: none;">{{ tariff_m.tariff.name }}</div>
+                <div class="tariff__description_subs">
+                    <ul>
+                        {% for line in tariff_m.tariff.description.splitlines %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size subscription">2 месяца</p>
+            </div>
+        </div>
+        <div class="tariff__wrapper" data-open-modal="payment-methods" id="payment-methods-s">
+            {% comment %} <a href="#" data-open-modal="payment-methods" id="payment-methods-s"> {% endcomment %}
+            <div class="tariff">
+                <p class="tariff__price">
+                    <span>{{ tariff_s.price }}</span> {{ tariff_s.currency.symbol }}
+                </p>
+                <h3 class="tariff__name">{{ tariff_s.tariff.site_name }}</h3>
+                <div class="tariff__full_name" style="display: none;">{{ tariff_s.tariff.name }}</div>
+                <div class="tariff__description_subs">
+                    <ul>
+                        {% for line in tariff_s.tariff.description.splitlines %}
+                            <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% comment %} <form action="{% url 'view_payment_methods' tariff_info.tariff_price.id %}" method="post">
+                    {% csrf_token %}
+                </form> {% endcomment %}
+                <p class="tariff__size subscription">7 дней</p>
+            </div>
+            {% comment %} </a> {% endcomment %}
+        </div>
+    </div>
+</div>
+<form class="secret-code-form" action="/activate-tariff/" method="post">
+    {% csrf_token %}
+    <input type="text" maxlength="12" class="secret-code-form__input ui-input" name="code" required placeholder="Секретный код">
+     {% comment %} {{ form.as_p }} {% endcomment %}
+    <input class="secret-code-form__submit ui-button" type="submit" value="Ok">
+</form>
+{% endblock main %}
+
+{% block payment_methods %}
+    <!-- Модальное окно для оплаты -->
+    {% include 'modal_payment_methods.html' %}
+{% endblock %}
+
+{% block footer %}
+    <footer class="footer">
+        <a class="footer__reviews-link" href="#">Отзывы о нас</a>
+    </footer>
+{%endblock%}
+

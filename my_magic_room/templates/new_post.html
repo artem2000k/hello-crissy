@@ -1,0 +1,27 @@
+{% extends "post.html" %}
+
+{% block headlinks %}
+{{ block.super }}
+{% comment %} <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet"> {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/vendor/quill/quill.snow.css' %}" />
+<link rel="stylesheet" href="{% static 'css/quill-patch.css' %}" />
+{% endblock headlinks %}
+
+{% block post %}
+<form action="">
+    <div class="post__header">
+        <div class="post__header-content">
+            <h1 class="post__title">Новый пост</h1>
+            <input class="post__title-input" type="text" placeholder="Введите название поста">
+            <label class="post__image-label">
+                Выберите изображение поста
+                <input type="file" accept="image/*">
+            </label>
+        </div>
+    </div>
+    <div class="post__content">
+        <div id="new-post-editor"></div>
+        <input class="new-post__submit ui-button" type="submit" value="Опубликовать пост">
+    </div>
+</form>
+{% endblock post %}

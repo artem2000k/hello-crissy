@@ -1,0 +1,23 @@
+{% extends "publication.html" %}
+{% load static %}
+
+{% block post %}
+<div class="post__header">
+    <div class="post__header-content">
+        <h1 class="post__title">{{ publication.title }}</h1>
+        <div class="post__info">{{ publication.created_at }}</div>
+        {% if request.user.is_superuser or request.user.is_staff %}
+        <div class="post__edit">
+            <a href="/admin/my_magic_room/posts/{{publication.slug}}/change/" class="post__edit_link">Редактировать</a>
+            <a href="/admin/my_magic_room/posts/{{publication.slug}}/delete/" class="post__edit_link">Удалить</a>
+        </div>
+        {% endif %}
+        <p class="post__first-paragraph">{{ publication.anonce }}</p>
+    </div>
+
+</div>
+<div class="post__content ck-content">
+    <p>{{ publication.description|safe }}</p>
+</div>
+{% endblock post %}
+

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список мемов</title>
+</head>
+<body>
+    <h1>Список мемов</h1>
+    <ul>
+        {% for meme in memes %}
+        <li>
+            <h2>{{ meme.title }}</h2>
+            <p>{{ meme.description }}</p>
+            {% if meme.image %}
+            <img src="{{ meme.image.url }}" alt="{{ meme.title }}">
+            {% endif %}
+            <p>Создано: {{ meme.created_at }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

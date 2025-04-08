@@ -1,0 +1,70 @@
+{% extends "posts.html" %}
+
+
+{% block posts %}
+    {% for publication in krissy_blogs %}
+        <a href="/krissy_blog/{{publication.slug}}" 
+            class="post {% if publication.anonce != "" %}post_announce{% endif %} 
+            {% if publication.a_type == "a_1" %}a-large-l
+            {% elif publication.a_type == "a_2" %}a-large-r
+            {% else %}type3
+            {% endif %}"
+            {% comment %} target="_blank" {% endcomment %}
+            rel="noopener noreferrer">
+
+            {% if publication.a_type == "a_1" or publication.a_type == "a_2" %}
+                {% if publication.image %}
+            <img class="post__image" src="{{ publication.image.url }}" alt="{{ publication.title }}">
+                {% endif %}
+            <div class="post__data_1">
+                <div class="post__data_1_text">
+                    <div class="post__info">{{ publication.created_at }}</div>
+                    <h2 class="post__title">{{ publication.title }}</h2>
+                    <p class="post__content">{{ publication.anonce }}</p>
+                </div>
+            </div>    
+
+            {% elif publication.image %}
+            {% comment %} {% if publication.image %} {% endcomment %}
+            <div class="post__image_container">
+                <img class="post__image" src="{{ publication.image.url }}" alt="{{ publication.title }}">
+            </div>
+            <div class="post__data">
+                <div class="post__info">{{ publication.created_at }}</div>
+                <h2 class="post__title">{{ publication.title }}</h2>
+                <p class="post__content">{{ publication.anonce }}</p>
+            </div>
+
+            {% else %}    
+            <div class="post__data announce_without_image">
+                <div class="post__info">{{ publication.created_at }}</div>
+                <h2 class="post__title">{{ publication.title }}</h2>
+                <p class="post__content">{{ publication.anonce }}</p>
+            </div>
+            {% endif %}
+        </a>
+    {% endfor %}
+{% endblock posts %}
+
+
+
+
+
+
+{% comment %} {% block posts %}
+    {% for krissy_blog in krissy_blogs %}
+
+        <a href="/krissy_blog/{{krissy_blog.slug}}" class="post {% if krissy_blog.anonce != "" %}post_announce{% endif %}">
+            {% if krissy_blog.image %}
+                <img class="post__image" src="{{ krissy_blog.image.url }}" alt="{{ krissy_blog.title }}">
+            {% endif %}
+            <div class="post__data">
+                <div class="post__info">{{ krissy_blog.created_at }}</div>
+                <h2 class="post__title">{{ krissy_blog.title }}</h2>
+                <p class="post__content">
+                    {{ krissy_blog.anonce }}
+                </p>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock posts %} {% endcomment %}

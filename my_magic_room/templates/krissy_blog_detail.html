@@ -1,0 +1,23 @@
+{% extends "publication.html" %}
+{% load static %}
+
+{% block post %}
+<div class="post__header">
+    <div class="post__header-content">
+        <h1 class="post__title">{{ krissy_blog.title }}</h1>
+        <div class="post__info">{{ krissy_blog.created_at }}</div>
+        {% if request.user.is_superuser or request.user.is_staff %}
+        <div class="post__edit">
+            <a href="/admin/my_magic_room/krissy_blog/{{krissy_blog.slug}}/change/" class="post__edit_link">Редактировать</a>
+            <a href="/admin/my_magic_room/krissy_blog/{{krissy_blog.slug}}/delete/" class="post__edit_link">Удалить</a>
+        </div>
+        {% endif %}
+        <p class="post__first-paragraph">{{ krissy_blog.anonce }}</p>
+    </div>
+
+</div>
+<div class="post__content">
+    <p>{{ krissy_blog.description|safe }}</p>
+</div>
+{% endblock post %}
+

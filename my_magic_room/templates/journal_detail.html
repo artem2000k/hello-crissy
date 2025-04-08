@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ journal.user.username }}'s Журнал</title>
+</head>
+<body>
+    <h1>{{ journal.user.username }}'s Журнал</h1>
+    <p>Создано: {{ journal.created_at }}</p>
+    <p>Последнее обновление: {{ journal.updated_at }}</p>
+    <h2>Страницы:</h2>
+    <ul>
+        {% for page in journal.pages.all %}
+        <li>
+            <h3>{{ page.title or "Страница "}} {{ page.page_number }}</h3>
+            <p>{{ page.content }}</p>
+            <p>Создано: {{ page.created_at }}</p>
+            <p>Последнее обновление: {{ page.updated_at }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

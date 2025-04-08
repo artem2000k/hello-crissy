@@ -1,0 +1,19 @@
+{% extends "posts.html" %}
+
+{% block posts %}
+    {% for tale in tales %}
+
+        <a href="/tales/{{tale.slug}}" class="post {% if tale.anonce != "" %}post_announce{% endif %}">
+            {% if tale.image %}
+                <img class="post__image" src="{{ tale.image.url }}" alt="{{ tale.title }}">
+            {% endif %}
+            <div class="post__data">
+                <div class="post__info">{{ tale.created_at }}</div>
+                <h2 class="post__title">{{ tale.title }}</h2>
+                <p class="post__content">
+                    {{tale.anonce}}
+                </p>
+            </div>
+        </a>
+    {% endfor %}
+{% endblock posts %}
