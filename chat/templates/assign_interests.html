@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% load static %}
+
+{% block headlinks %}
+    <link rel="stylesheet" href="{% static 'css/assign-interests.css' %}" />
+{% endblock headlinks %}
+
+{% block main %}
+<div class="interests">
+    <div class="interests__header">
+        <h2 class="interests__heading">Мои интересы</h2>
+    </div>
+    <form class="interests__form" method="post">
+        {% csrf_token %}
+        {% for category in categories %}
+            <div class="interests__category">
+                <h3 class="interests__category-name">{{ category.name }}</h3>
+                <div class="interests__category-list">
+                {% for interest in category.interests.all %}
+                    <div class="ui-checkbox-button interests__element">
+                        <input type="checkbox" name="interests" id="interest-{{ interest.id }}" {% if interest.id in user_interests %}checked{% endif %} value="{{ interest.id }}">
+                        <label for="interest-{{ interest.id }}">
+                            {{ interest.name }}
+                        </label>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    
+        <input class="interests__submit ui-button" type="submit" value="Сохранить интересы">
+    </form>
+</div>
+{% endblock main %}

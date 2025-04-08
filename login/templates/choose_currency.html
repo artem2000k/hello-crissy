@@ -1,0 +1,8 @@
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% for currency in currencies %}
+        {{currency.name}}{{currency.code}}{{currency.id}}
+    {% endfor %}
+    <button type="submit">Отправить</button>
+</form>

@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ЧАТ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/chat.css' %}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="header">
+            <div class="profile">
+                <div class="avatar">
+                    <img src="{% static 'images/avatar.png' %}" alt="Аватарка" class="avatar-img">
+                </div>
+                <h4>Привет {{ user.username }}</h4>
+                <h4>Твой баланс {{ user.balance }}</h4>
+                <a href="{% url 'change_nickname' %}">Сменить ник</a>
+                <a href="{% url 'change_nick_color' %}">Сменить цвет ника</a>
+                <a href="{% url 'change_email' %}">Сменить почту</a>
+                <a href="{% url 'change_password' %}">Сменить пароль</a>
+                <a href="{% url 'delete_user' %}">Удалить профиль</a>
+                <a href="{% url 'magic_room' %}">Волшебная комнатка</a>
+                <a href="{% url 'my_time' %}">Мое время</a>
+                <a href="{% url 'payment' %}">Пополнение баланса</a>
+                <a href="{% url 'users_chats' %}">Мои чаты</a>
+            </div>
+            <button id="logout" onclick="location.href='/logout'">Выйти</button>
+            <button id="remove_context" onclick="location.href='/remove_context'">Очистить контекст</button>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <!-- Здесь будут отображаться сообщения -->
+        </div>
+        <div class="footer">
+            <textarea id="text_input" rows="1" placeholder="Введите сообщение..."></textarea>
+            <button id="submit">Сказать</button>
+        </div>
+    </div>
+    <audio id="audio-player" controls style="display: none;"></audio>
+    <script src="{% static 'js/update_activity.js' %}"></script>
+    <script>
+<<<<<<< HEAD
+    
+=======
+>>>>>>> b5beb38 (Сверстан чат с нейронкой)
+      $(document).ready(function(){
+            $('#submit').click(function(){
+                var textData = $('#text_input').val();
+                if (textData.trim() === '') {
+                    return;
+                }
+
+                $('#chat-box').append('<div class="message user-message">' + textData + '</div>');
+                $('#text_input').val('');
+
+<<<<<<< HEAD
+                let token 
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '',
+                    data: {'text_data': textData, 'csrfmiddlewaretoken': "
+                    {{ csrf_token }}"},
+=======
+                $.ajax({
+                    type: 'POST',
+                    url: '',
+                    data: {'text_data': textData, 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+>>>>>>> b5beb38 (Сверстан чат с нейронкой)
+                    success: function(response){
+                        if(response){
+                            var responseText = response.text;
+                            var audioUrl = response.audio;
+
+                            $('#chat-box').append('<div class="message ai-message">' + responseText + '</div>');
+
+                            if (audioUrl) {
+                                var audioPlayer = $('#audio-player')[0];
+                                audioPlayer.src = audioUrl;
+                                audioPlayer.style.display = 'block';
+                                audioPlayer.play();
+                            }
+
+                            $('#chat-box').scrollTop($('#chat-box')[0].scrollHeight); // Прокрутка вниз
+                        } else {
+                            $('#chat-box').append('<div class="message error-message">Ошибка: пустой ответ от сервера</div>');
+                        }
+                    },
+                    error: function(){
+                        $('#chat-box').append('<div class="message error-message">Ошибка: запрос не удался</div>');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

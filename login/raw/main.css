@@ -1,0 +1,394 @@
+@import url("fonts.css");
+
+:root {
+    --ui-background-gradient: linear-gradient(rgba(74, 74, 74, 0.42), rgba(151, 151, 151, 0.42));
+    --ui-background-gradient-inverted: linear-gradient(rgba(151, 151, 151, 0.42), rgba(74, 74, 74, 0.42));
+    --ui-glass-shadow: inset -0.5px -1px 0 0 rgba(255, 255, 255, 0.05), 
+                        inset 0.5px 1px 0 0 rgba(255, 255, 255, 0.25);
+
+    --text-color: rgba(255, 255, 255, 1);
+    --pink: #ED5CAB;
+    --pink-hover: #f074b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to right,#090944, #c746ab);
+
+    font-family: "SF Pro Display";
+    position: relative;
+}
+
+.body::before {
+    content: "";
+
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-image: url("./res/background-pattern.webp");
+    background-repeat: no-repeat;
+    background-position: 989px -100px;
+    background-size: auto 112vh;
+
+    opacity: 0.21;
+}
+
+.container {
+    width: min(100vw, 1440px);
+    height: 100%;
+    margin: 0 auto;
+    padding: 48px 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+.krissy-img {
+    position: absolute;
+
+    width: auto;
+    height: 88.7vh;
+
+    bottom: 0;
+    right: 440px;
+
+    transform: translateX(50%);
+
+    z-index: 2;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+
+    margin-bottom: 158px;
+}
+
+.header__menu-button {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+    font-weight: 500;
+    text-transform: uppercase;
+
+    color: var(--text-color);
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--ui-background-gradient);
+    box-shadow: var(--ui-glass-shadow);
+
+    cursor: pointer;
+
+    transition: background .5s ease-out;
+}
+
+.header__menu-button:hover {
+    background: var(--ui-background-gradient-inverted);
+}
+
+[data-open-menu]{
+    z-index: 1;
+}
+
+.header__menu-button_hided {
+    visibility: hidden;
+    opacity: 0;
+    user-select: none;
+}
+
+.header__logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.navmenu{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    width: 373px;
+
+    padding: 0px 0px 16px 0px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background: var(--ui-background-gradient);
+    box-shadow: var(--ui-glass-shadow);
+    backdrop-filter: blur(24px);
+    border-radius: 30px;
+
+    transform: translate(-50%, -50%) scale(0, 0);
+
+    transition: transform .3s ease-out;
+
+    overflow: hidden;
+
+    z-index: 3;
+}
+
+.navmenu__blur {
+    backdrop-filter: blur(0px);
+    transition: backdrop-filter .3s ease-in;
+    z-index: 2;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    visibility: hidden;
+}
+
+.navmenu__button {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: none;
+    border: none;
+    border-radius: 30px 0 30px 0;
+
+    transition: background .3s ease-in;
+
+    cursor: pointer;
+}
+
+.navmenu__button:hover{
+    background: #ffffff15;
+}
+
+.navmenu__heading {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 115%;
+
+    color: var(--text-color);
+
+    padding-left: 20px;
+    margin-bottom: 36px;
+}
+
+.navmenu__mainlist {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.navmenu__link {
+    display: flex;
+    align-items: center;
+
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 120%;
+
+    text-decoration: none;
+
+    color: #ffffff7e;
+
+    transition: background .2s ease-out;
+    padding: 5px 20px;
+}
+
+.navmenu__link:hover{
+    background: #ffffff15;
+}
+
+.navmenu__link_krissy {
+    margin-bottom: 28px;
+}
+
+.navmenu__mainlist .navmenu__link:last-child {
+    margin-bottom: 12px;
+}
+
+.navmenu__link-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 20px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.navmenu__link-icon_krissy{
+    background: #63515d7a;
+    object-fit: contain;
+}
+
+
+.navmenu__exit{
+    width: 100%;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 0 7px 0;
+}
+
+.navmenu__social 
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
+.navmenu__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+
+    transition: transform .2s ease-out;
+}
+
+.navmenu__social-link:hover {
+    transform: scale(1.2);
+}
+
+.main {
+    display: flex;
+    align-items: start;
+}
+
+.main__column:first-child {
+    width: 501px;
+    margin-right: 53px;
+
+    z-index: 1;
+}
+
+.main__column:nth-child(2n) {
+    width: 293px;
+    padding-top: 188px;
+    margin-right: auto;
+    
+    z-index: 2;
+}
+
+.main__column:nth-child(3n) {
+    width: 341px;
+    padding-top: 250px;
+    z-index: 2;
+}
+
+.main__title {
+    font-size: 100px;
+    font-weight: 500;
+    line-height: 100px;
+    letter-spacing: -3px;
+
+    color: var(--text-color);
+
+    margin-bottom: 80px;
+}
+
+.main__title_pink{
+    color: var(--pink);
+}
+
+.main__start-chat-button{
+
+    width: 230px;
+    height: 60px;
+
+    background-color: var(--pink);
+
+    border: none;
+    border-radius: 30px;
+
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    color: var(--text-color);
+
+    cursor: pointer;
+
+    transition: background .2s ease-out;
+}
+
+.main__start-chat-button:hover {
+    background-color: var(--pink-hover);
+}
+
+.main__message {
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 120%;
+
+    color: var(--text-color);
+
+    border-radius: 30px;
+
+    padding: 20px;
+
+    background: var(--ui-background-gradient);
+    box-shadow: var(--ui-glass-shadow);
+    backdrop-filter: blur(30px);
+
+    overflow-y: auto;
+}
+
+.main__message_voice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 36px;
+}
+
+.footer {
+    z-index: 2;
+}
+
+.footer__contact-link {
+    font-size: 16px;
+    font-weight: 600;
+
+    color: #ED5CAB;
+    
+    opacity: .5;
+}
+

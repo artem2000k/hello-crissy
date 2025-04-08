@@ -1,0 +1,74 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block headlinks %}
+	{{block.super}}
+	<link rel="stylesheet" href="{% static "css/verify-code.css" %}">
+    <script >
+        window.addEventListener("DOMContentLoaded", () => {
+            const separatedInput = document.querySelector(".verify-code__separated-input");
+            const codeInputs = document.querySelectorAll(".verify-code__separated-input input");
+            const originalInput = document.querySelector(".verify-code__input");
+    
+            // Обработчик ввода в отдельные поля
+            separatedInput.addEventListener("input", (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, "");
+    
+                if (e.target.value !== "" && e.target.nextElementSibling) {
+                    e.target.nextElementSibling.focus();
+                }
+    
+                if (e.target.value === "" && e.target.previousElementSibling) {
+                    e.target.previousElementSibling.focus();
+                }
+    
+                originalInput.value = [...codeInputs].map(input => input.value).join("");
+            });
+    
+            // Обработчик нажатия Backspace
+            codeInputs.forEach((input) => {
+                input.addEventListener("keyup", (e) => {
+                    if (e.code === "Backspace" && e.target.value === "" && e.target.previousElementSibling) {
+                        e.target.previousElementSibling.focus();
+                    }
+                });
+            });
+    
+            // **Обработчик вставки (paste)**
+            separatedInput.addEventListener("paste", (e) => {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData("text").replace(/[^0-9]/g, ""); // Берем только цифры
+    
+                if (pasteData.length === 4) { // Проверяем, что вставленный код 4-значный
+                    codeInputs.forEach((input, index) => {
+                        input.value = pasteData[index] || ""; // Заполняем каждое поле
+                    });
+    
+                    originalInput.value = pasteData; // Записываем в скрытое поле
+                    codeInputs[codeInputs.length - 1].focus(); // Перемещаем фокус на последнее поле
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block application %}
+    <div class="verify-code">
+        <h3 class="verify-code__heading modal__heading">Подтверждение регистрации</h3>
+        <form class="modal__form" method="post">
+            {% csrf_token %}
+            <p class="verify-code__text">
+                Мы отправили тебе на email письмо с кодом. Введи его, пожалуйста, сюда
+            </p>
+            <input class="verify-code__input modal__input" type="hidden" name="verification_code" maxlength="4" id="verification_code" required>
+            <div class="verify-code__separated-input">
+                <input type="text" maxlength="1" name="digit1">
+                <input type="text" maxlength="1" name="digit2">
+                <input type="text" maxlength="1" name="digit3">
+                <input type="text" maxlength="1" name="digit4">
+            </div>
+            <button class="verify-code__resend">Отправить код повторно</button>
+            <input class="verify-code__submit ui-button  modal__submit" type="submit" value="Далее">
+        </form>
+    </div>
+{% endblock %}
